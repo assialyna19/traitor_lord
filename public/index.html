@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Traitor Lord Challenge</title>
+</head>
+<body>
+  <h1>Welcome to the Traitor Lord Challenge</h1>
+
+  <h2>Register</h2>
+  <form action="/register" method="post">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Register</button>
+  </form>
+
+  <h2>Login</h2>
+  <form action="/login" method="post">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <h2>Create a Form</h2>
+  <form id="formCreator">
+    <label for="formTitle">Form Title:</label>
+    <input type="text" id="formTitle" placeholder="Form Title">
+    <button type="button" id="submitForm">Create Form</button>
+  </form>
+
+  <script>
+    // Initialize WebSocket connection
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.onopen = () => {
+      console.log('Connected to WebSocket server');
+    };
+
+    ws.onmessage = (event) => {
+      console.log('Received:', event.data);
+      // Handle the received message (e.g., update the form list or UI)
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket server');
+    };
+
+    // Function to send form creation message via WebSocket
+    document.getElementById('submitForm').addEventListener('click', () => {
+      const formTitle = document.getElementById('formTitle').value;
+      const message = JSON.stringify({ type: 'createForm', title: formTitle });
+      ws.send(message);
+    });
+  </script>
+</body>
+</html>

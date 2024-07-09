@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Form</title>
+</head>
+<body>
+  <h1>Create a new form</h1>
+  <form action="/forms" method="POST">
+    <label for="title">Form Title:</label>
+    <input type="text" id="title" name="title" placeholder="Enter Form Title" required>
+    
+    <label for="fields">Form Fields (JSON format):</label>
+    <textarea id="fields" name="fields" placeholder="Enter Form Fields (JSON format)" required></textarea>
+    
+    <button type="submit">Create Form</button>
+  </form>
+</body>
+</html>
+
